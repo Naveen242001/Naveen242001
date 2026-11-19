@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naveen Baranwal – Data Scientist & Generative AI Engineer</title>
+<meta name="description" content="Naveen Baranwal builds autonomous agents, RAG systems and reliable enterprise AI.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07071a; --card:#12122e; --ink:#f4f4ff; --muted:#a3a3c8; --line:#2a2a55;
+  --violet:#8b5cf6; --cyan:#22d3ee; --pink:#f472b6; --amber:#fbbf24; --lime:#a3e635;
+  --grad:linear-gradient(110deg,var(--cyan),var(--violet),var(--pink),var(--amber),var(--cyan));
+  --display:'Bricolage Grotesque',system-ui,sans-serif; --body:'IBM Plex Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative}
+
+/* animated background blobs */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;animation:float 16s ease-in-out infinite alternate}
+.b1{width:520px;height:520px;background:var(--violet);top:-120px;left:-100px}
+.b2{width:460px;height:460px;background:var(--cyan);top:30%;right:-140px;animation-delay:-5s;opacity:.3}
+.b3{width:420px;height:420px;background:var(--pink);bottom:-120px;left:25%;animation-delay:-9s;opacity:.3}
+@keyframes float{to{transform:translate(70px,50px) scale(1.15)}}
+.glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%}
+
+header.nav{position:sticky;top:0;z-index:5;background:rgba(7,7,26,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:62px}
+.nav b{font:800 19px var(--display);background:var(--grad);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:slide 8s linear infinite}
+.nav nav{display:flex;gap:22px;font-size:15px}
+.nav nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav nav a:hover{color:var(--cyan)}
+@media(max-width:560px){.nav nav a:nth-child(n+4){display:none}}
+@keyframes slide{to{background-position:300% 0}}
+
+.hero{padding:80px 0 30px}
+.hi{display:inline-block;padding:6px 14px;border:1px solid var(--lime);color:var(--lime);border-radius:999px;font-size:14px;margin-bottom:22px}
+.hi i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lime);margin-right:8px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(163,230,53,0);transform:scale(.8)}0%{box-shadow:0 0 0 0 rgba(163,230,53,.7)}}
+h1{font:800 clamp(2.8rem,8vw,6rem)/.98 var(--display);letter-spacing:-.04em;max-width:13ch;background:var(--grad);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:slide 10s linear infinite}
+.type{margin-top:22px;font:600 clamp(1.2rem,3vw,1.7rem) var(--display);color:var(--ink);min-height:1.5em}
+.type span{color:var(--amber)}
+.type::after{content:"";display:inline-block;width:3px;height:1.1em;background:var(--cyan);margin-left:4px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lede{margin-top:16px;max-width:58ch;color:var(--muted);font-size:1.1rem}
+.cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--violet);transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px -8px var(--violet)}
+.btn.primary{background:var(--grad);background-size:200% 100%;border-color:transparent;color:#07071a;font-weight:600}
+.btn.primary:hover{background-position:100% 0;box-shadow:0 10px 30px -8px var(--pink)}
+
+.graph{margin-top:50px;background:rgba(18,18,46,.8);border:1px solid var(--line);border-radius:22px;padding:22px 22px 16px;box-shadow:0 0 60px -20px var(--violet)}
+.graph svg{width:100%;height:auto;display:block;overflow:visible}
+.edge{stroke:var(--line);stroke-width:3;stroke-linecap:round;transition:stroke .3s}
+.node rect{fill:#0c0c26;stroke:var(--line);stroke-width:2;rx:13;transition:.3s}
+.node text{font:500 14px var(--body);fill:var(--muted);text-anchor:middle;transition:.3s}
+.node.on rect{stroke:var(--c);fill:color-mix(in srgb,var(--c) 22%,#0c0c26);filter:drop-shadow(0 0 12px var(--c))}
+.node.on text{fill:#fff}
+.packet{fill:var(--amber);filter:drop-shadow(0 0 10px var(--amber))}
+.trace{display:flex;gap:12px;align-items:baseline;margin-top:12px;padding-top:14px;border-top:1px dashed var(--line);font-size:15px;color:var(--muted);min-height:50px}
+.trace strong{font-family:var(--display);white-space:nowrap}
+.trace button{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+.trace button:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* marquee */
+.marquee{margin-top:60px;border-block:1px solid var(--line);background:rgba(18,18,46,.6);overflow:hidden;padding:16px 0}
+.track{display:flex;gap:14px;width:max-content;animation:scroll 38s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{padding:8px 18px;border-radius:999px;font:600 15px var(--display);color:#07071a;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+section{padding:90px 0 0}
+h2{font:800 clamp(2rem,4.5vw,3rem)/1.05 var(--display);letter-spacing:-.03em;margin-bottom:32px}
+h2::after{content:"";display:block;width:64px;height:6px;border-radius:6px;background:var(--grad);margin-top:14px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.stat{border-radius:20px;padding:28px;color:#07071a;transition:transform .25s}
+.stat:hover{transform:translateY(-6px) rotate(-1deg)}
+.stat b{display:block;font:800 clamp(3rem,6vw,4.4rem)/1 var(--display);letter-spacing:-.04em}
+.stat span{font-weight:500}
+.s1{background:var(--cyan)}.s2{background:var(--amber)}.s3{background:var(--pink)}
+
+.now{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.panel{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:18px;padding:26px;transition:transform .25s,box-shadow .25s}
+.panel:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px var(--c)}
+.panel h3{font:800 1.2rem var(--display);margin-bottom:14px;color:var(--c)}
+.panel ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.panel li{background:color-mix(in srgb,var(--c) 18%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:5px 12px;border-radius:999px;font-size:15px}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.proj{position:relative;border-radius:22px;padding:2px;background:linear-gradient(140deg,var(--c1),var(--c2));transition:transform .25s}
+.proj:hover{transform:translateY(-8px) scale(1.01)}
+.proj>div{background:var(--card);border-radius:20px;padding:28px;height:100%}
+.proj em{font-style:normal;font:800 .85rem var(--display);color:#07071a;background:linear-gradient(110deg,var(--c1),var(--c2));padding:4px 12px;border-radius:999px}
+.proj h3{font:800 1.5rem/1.15 var(--display);margin:16px 0 10px}
+.proj p{color:var(--muted)}
+.proj small{display:block;margin-top:14px;color:var(--c1);font-weight:500}
+.more{margin-top:26px}
+.more a{color:var(--cyan)}
+
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.sgroup h3{font:800 1.05rem var(--display);margin-bottom:12px;color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:6px 13px;border-radius:10px;font-size:15px;background:var(--card);border:1px solid var(--c);transition:.2s}
+.chips span:hover{background:var(--c);color:#07071a;transform:translateY(-3px)}
+
+.contact{padding-bottom:100px}
+.cbox{border-radius:30px;padding:clamp(28px,6vw,64px);background:var(--grad);background-size:300% 100%;animation:slide 12s linear infinite;color:#07071a}
+.cbox p{font:800 clamp(2rem,6vw,4rem)/1.02 var(--display);letter-spacing:-.04em;max-width:15ch}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.cbox .btn{background:#07071a;color:#fff;border-color:#07071a}
+.cbox .btn:hover{box-shadow:0 10px 30px -8px #000}
+footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(--muted)}
+
+.rv{opacity:0;transform:translateY(34px) scale(.98);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<header class="nav"><div class="wrap">
+  <b>Naveen Baranwal</b>
+  <nav aria-label="Primary"><a href="#now">Now</a><a href="#work">Work</a><a href="#stack">Stack</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <span class="hi"><i></i>Open to collaborate</span>
+  <h1>I make AI agents reliable enough to ship.</h1>
+  <div class="type" aria-label="I build agents, RAG systems, guardrails, local LLM apps">I build <span id="typed"></span></div>
+  <p class="lede">I'm Naveen, a data scientist and generative AI engineer. I design multi-agent workflows, streaming RAG pipelines and safety systems for enterprise teams.</p>
+  <div class="cta">
+    <a class="btn primary" href="#work">See my work</a>
+    <a class="btn" href="mailto:naveen200124@gmail.com">Email me</a>
+  </div>
+
+  <div class="graph" aria-label="Animated diagram of an agent workflow">
+    <svg viewBox="0 0 900 170" role="img" aria-label="Request flows through router, retriever, guardrail, LLM and response nodes">
+      <g id="edges"></g><g id="nodes"></g>
+      <circle class="packet" id="packet" r="10" cx="70" cy="85"/>
+    </svg>
+    <div class="trace" aria-live="polite"><strong id="tstep">Router</strong><span id="tdesc"></span><button id="replay" type="button">Pause</button></div>
+  </div>
+</div>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section><div class="wrap rv">
+  <h2>Results that count</h2>
+  <div class="stats" aria-label="Highlights">
+    <div class="stat s1"><b data-n="3" data-s="+">0</b><span>years building AI/ML systems</span></div>
+    <div class="stat s2"><b data-n="90" data-s="%">0</b><span>precision on safety computer-vision systems</span></div>
+    <div class="stat s3"><b data-n="30" data-s="%">0</b><span>less manual ops using local LLMs</span></div>
+  </div>
+</div></section>
+
+<section id="now"><div class="wrap rv">
+  <h2>What I'm up to</h2>
+  <div class="now">
+    <div class="panel" style="--c:var(--cyan)"><h3>Working on</h3><ul><li>Multi-agent workflows (LangGraph)</li><li>Streaming RAG pipelines</li><li>MCP server integrations</li></ul></div>
+    <div class="panel" style="--c:var(--lime)"><h3>Learning</h3><ul><li>KV-cache optimization</li><li>Grouped Query Attention</li><li>DPO / RLHF fine-tuning</li></ul></div>
+    <div class="panel" style="--c:var(--pink)"><h3>Open to collaborate on</h3><ul><li>Open-source agentic frameworks</li><li>Workflow automation</li><li>LLM guardrails</li></ul></div>
+    <div class="panel" style="--c:var(--amber)"><h3>Looking for help with</h3><ul><li>Distributed multi-agent state persistence</li><li>Low-latency SLM inference</li></ul></div>
+  </div>
+</div></section>
+
+<section id="work"><div class="wrap rv">
+  <h2>Selected work</h2>
+  <div class="projects">
+    <article class="proj" style="--c1:var(--cyan);--c2:var(--violet)"><div><em>Computer vision</em><h3>Safety vision systems</h3><p>Pipelines that detect safety violations in real time, reaching 90% precision.</p><small>Python · OpenCV · PyTorch</small></div></article>
+    <article class="proj" style="--c1:var(--amber);--c2:var(--pink)"><div><em>Local LLMs</em><h3>Local LLM automation</h3><p>Self-hosted models via Ollama took over repetitive operational tasks and cut manual work by 30%, with data kept in-house.</p><small>Ollama · FastAPI · LangChain</small></div></article>
+    <article class="proj" style="--c1:var(--lime);--c2:var(--cyan)"><div><em>Agents</em><h3>Multi-agent workflows</h3><p>Stateful agent graphs with retrieval, guardrails and evaluation, scored with RAGAS before they reach users.</p><small>LangGraph · RAGAS · Redis</small></div></article>
+  </div>
+  <p class="more"><a href="https://github.com/Naveen242001?tab=repositories">Browse all repositories on GitHub</a></p>
+</div></section>
+
+<section id="stack"><div class="wrap rv">
+  <h2>Tools I use</h2>
+  <div class="stack">
+    <div class="sgroup" style="--c:var(--violet)"><h3>AI &amp; LLMs</h3><div class="chips"><span>LangChain</span><span>LangGraph</span><span>RAGAS</span><span>Ollama</span><span>PyTorch</span><span>TensorFlow</span><span>Keras</span><span>scikit-learn</span></div></div>
+    <div class="sgroup" style="--c:var(--cyan)"><h3>Backend &amp; data</h3><div class="chips"><span>Python</span><span>FastAPI</span><span>Flask</span><span>Kafka</span><span>Airflow</span><span>Redis</span><span>Postgres</span><span>MySQL</span><span>SQL Server</span><span>Neo4j</span></div></div>
+    <div class="sgroup" style="--c:var(--pink)"><h3>Analysis</h3><div class="chips"><span>NumPy</span><span>Pandas</span><span>SciPy</span><span>Matplotlib</span><span>Plotly</span><span>OpenCV</span></div></div>
+    <div class="sgroup" style="--c:var(--amber)"><h3>Platform</h3><div class="chips"><span>AWS</span><span>Git</span><span>GitHub</span><span>Anaconda</span></div></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap rv">
+  <div class="cbox">
+    <p>Building something agentic? Let's talk.</p>
+    <div class="links">
+      <a class="btn" href="mailto:naveen200124@gmail.com">naveen200124@gmail.com</a>
+      <a class="btn" href="https://linkedin.com/in/Naveen%20Baranwal">LinkedIn</a>
+      <a class="btn" href="https://github.com/Naveen242001">GitHub</a>
+      <a class="btn" href="https://youtube.com/@naveenbaranwal27">YouTube</a>
+      <a class="btn" href="https://instagram.com/naveen_baranwal_07">Instagram</a>
+    </div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Naveen Baranwal</div></footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var steps=[
+    ['Router','Reads the request and picks the right agent.','#22d3ee'],
+    ['Retriever','Pulls relevant context from the vector store.','#a3e635'],
+    ['Guardrail','Checks inputs and outputs against safety rules.','#f472b6'],
+    ['LLM','Generates the answer, local or hosted.','#8b5cf6'],
+    ['Response','Streams the result back to the user.','#fbbf24']
+  ];
+  var ns='http://www.w3.org/2000/svg',xs=[70,255,450,645,830],y=85,w=120,h=52;
+  var E=document.getElementById('edges'),N=document.getElementById('nodes'),nodes=[],edges=[];
+  function el(t,a,p){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+  for(var i=0;i<xs.length-1;i++)edges.push(el('line',{class:'edge',x1:xs[i]+w/2,y1:y,x2:xs[i+1]-w/2,y2:y},E));
+  steps.forEach(function(s,i){
+    var g=el('g',{class:'node'},N);g.style.setProperty('--c',s[2]);
+    el('rect',{x:xs[i]-w/2,y:y-h/2,width:w,height:h},g);
+    el('text',{x:xs[i],y:y+5},g).textContent=s[0];nodes.push(g);
+  });
+  var pk=document.getElementById('packet'),ts=document.getElementById('tstep'),td=document.getElementById('tdesc'),btn=document.getElementById('replay');
+  var cur=0,paused=reduce,timer;
+  function show(i){
+    nodes.forEach(function(n,k){n.classList.toggle('on',k===i)});
+    edges.forEach(function(e,k){e.style.stroke=k<i?steps[k+1][2]:''});
+    pk.style.transition=paused?'none':'cx .8s ease';pk.setAttribute('cx',xs[i]);
+    ts.textContent=steps[i][0];ts.style.color=steps[i][2];td.textContent=steps[i][1];
+  }
+  function start(){clearInterval(timer);if(!paused)timer=setInterval(function(){cur=(cur+1)%steps.length;show(cur)},1900)}
+  nodes.forEach(function(n,i){n.style.cursor='pointer';n.addEventListener('click',function(){cur=i;show(i);start()})});
+  btn.textContent=paused?'Play':'Pause';
+  btn.onclick=function(){paused=!paused;btn.textContent=paused?'Play':'Pause';start()};
+  show(0);start();
+
+  // typewriter
+  var words=['multi-agent workflows.','streaming RAG pipelines.','LLM guardrails.','local LLM apps.','safety vision systems.'],wi=0,ci=0,del=false,tp=document.getElementById('typed');
+  if(reduce){tp.textContent=words[0]}else(function type(){
+    var wd=words[wi];ci+=del?-1:1;tp.textContent=wd.slice(0,ci);
+    var d=del?35:75;
+    if(!del&&ci===wd.length){del=true;d=1400}else if(del&&ci===0){del=false;wi=(wi+1)%words.length;d=300}
+    setTimeout(type,d);
+  })();
+
+  // marquee
+  var tech=['Python','LangGraph','LangChain','FastAPI','RAGAS','Ollama','PyTorch','Kafka','Airflow','Redis','AWS','Neo4j','OpenCV','Postgres'],cols=['#22d3ee','#a3e635','#f472b6','#fbbf24','#8b5cf6'],h='';
+  for(var r=0;r<2;r++)tech.forEach(function(t,i){h+='<span style="background:'+cols[i%cols.length]+'">'+t+'</span>'});
+  document.getElementById('track').innerHTML=h;
+
+  // reveal + count-up
+  function count(b){var n=+b.dataset.n,s=b.dataset.s,t0=null;
+    function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1);b.textContent=Math.round(n*(1-Math.pow(1-p,3)))+s;if(p<1)requestAnimationFrame(f)}
+    reduce?b.textContent=n+s:requestAnimationFrame(f)}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(count);io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+
+  // cursor glow
+  var g=document.getElementById('glow');
+  if(!reduce)addEventListener('pointermove',function(e){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
